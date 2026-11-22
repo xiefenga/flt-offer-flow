@@ -1,0 +1,52 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "oxc", "unicorn"],
+  "ignorePatterns": ["dist/**", "node_modules/**"],
+  "jsPlugins": ["eslint-plugin-perfectionist"],
+  "rules": {
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ],
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "prefer-const": "error",
+    "curly": ["error", "all"]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "rules": {
+        "perfectionist/sort-imports": [
+          "error",
+          {
+            "type": "line-length",
+            "order": "asc",
+            "newlinesBetween": 1,
+            "newlinesInside": 0,
+            "internalPattern": ["^~/", "^@/"],
+            "groups": [
+              ["value-builtin", "value-external"],
+              [
+                "value-internal",
+                "value-parent",
+                "value-sibling",
+                "value-index",
+                "value-subpath",
+                "value-style"
+              ],
+              "type"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

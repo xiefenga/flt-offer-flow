@@ -1,0 +1,80 @@
+{
+  "name": "offer-flow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "本地录用通知书生成与企业 SMTP 发信客户端",
+  "type": "module",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "dev": "node scripts/dev.ts",
+    "test": "node --test test/*.test.ts",
+    "build": "npm run typecheck && vite build",
+    "start": "npm run build && electron .",
+    "test:desktop": "node test/desktop.smoke.ts",
+    "lint": "oxlint --deny-warnings .",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "typecheck": "tsc --noEmit",
+    "package": "npm run build && electron-builder --publish never"
+  },
+  "dependencies": {
+    "html-to-text": "^10.0.1",
+    "nodemailer": "^10.6.1",
+    "sanitize-html": "^2.18.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.13",
+    "@lobehub/ui": "^6.19.0",
+    "@playwright/test": "^1.65.1",
+    "@rolldown/plugin-babel": "^0.3.1",
+    "@stylexjs/stylex": "^0.19.2",
+    "@stylexjs/unplugin": "^0.19.2",
+    "@tiptap/core": "^3.35.0",
+    "@tiptap/extension-text-align": "^3.35.0",
+    "@tiptap/extension-text-style": "^3.35.0",
+    "@tiptap/react": "^3.35.0",
+    "@tiptap/starter-kit": "^3.35.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/smtp-server": "^3.5.13",
+    "@vitejs/plugin-react": "^6.3.0",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
+    "eslint-plugin-perfectionist": "^5.14.0",
+    "lucide-react": "1.77.0",
+    "motion": "^14.14.0",
+    "oxfmt": "^0.79.0",
+    "oxlint": "^1.94.0",
+    "pdfjs-dist": "^6.5.438",
+    "postal-mime": "^4.2.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "smtp-server": "^3.21.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "build": {
+    "appId": "com.xiefenga.offerflow",
+    "productName": "Offer Flow",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "desktop/**/*",
+      "shared/**/*",
+      "templates/**/*"
+    ],
+    "artifactName": "Offer-Flow-${version}-${os}-${arch}.${ext}",
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.business"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

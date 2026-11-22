@@ -1,0 +1,4 @@
+{
+  "subject": "{{name}}——入职通知书",
+  "richText": "<p><span style=\"font-size:11pt\">{{name}}：<br>您好，附件为入职通知书，请查收！<br>体检开票信息如下，请按照入职通知书上的报到时间按时报到，欢迎加入{{company}}！<br><br>{{invoiceInfo}}<br><br></span><span style=\"font-size:11pt;color:#0000ff\">Best Regards!<br>人力资源部<br>{{company}}<br>邮箱：hr@example.com</span></p>"
+}

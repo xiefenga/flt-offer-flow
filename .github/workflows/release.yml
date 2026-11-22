@@ -1,0 +1,67 @@
+name: Release desktop app
+
+on:
+  push:
+    tags:
+      - "v[0-9]*"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            target: --mac
+            arch: arm64
+            extension: dmg
+          - os: macos-latest
+            target: --mac
+            arch: x64
+            extension: dmg
+          - os: windows-latest
+            target: --win
+            arch: x64
+            extension: exe
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Check version tag
+        shell: bash
+        run: |
+          node -e "const v = require('./package.json').version; if (process.env.GITHUB_REF_NAME !== 'v' + v) throw Error('Expected tag v' + v)"
+      - run: npm ci
+      - run: npm test
+      - run: npm run package -- ${{ matrix.target }} --${{ matrix.arch }}
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installer-${{ matrix.os }}-${{ matrix.arch }}
+          path: release/*.${{ matrix.extension }}
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: installers
+          merge-multiple: true
+      - name: Publish installers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          flags=()
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then flags+=(--prerelease); fi
+          gh release create "$GITHUB_REF_NAME" installers/* --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes "${flags[@]}"

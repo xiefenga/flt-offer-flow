@@ -1,0 +1,70 @@
+:root {
+  --app-scroll-size: 10px;
+  --app-scroll-inset: 2px;
+  --app-scroll-thumb: #879b91;
+  --app-scroll-hover: #627d6e;
+  --app-scroll-active: #456451;
+}
+
+::-webkit-scrollbar {
+  width: var(--app-scroll-size);
+  height: var(--app-scroll-size);
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border: var(--app-scroll-inset) solid transparent;
+  border-radius: 999px;
+  background: var(--app-scroll-thumb) padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--app-scroll-hover);
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--app-scroll-active);
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* A non-auto scrollbar-width disables Chromium's scrollbar pseudo-elements. */
+body .lobe-picker-root.lobe-picker-dropdown .lobe-picker-time-panel-column {
+  scrollbar-width: auto;
+}
+
+/* LobeUI draws its own thumb over a viewport with hidden native scrollbars. */
+.lobe-scroll-area .lobe-scroll-area__scrollbar[data-orientation] {
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--app-scroll-inset);
+  border-radius: 999px;
+}
+.lobe-scroll-area .lobe-scroll-area__scrollbar[data-orientation="vertical"] {
+  width: var(--app-scroll-size);
+}
+.lobe-scroll-area .lobe-scroll-area__scrollbar[data-orientation="horizontal"] {
+  height: var(--app-scroll-size);
+}
+.lobe-scroll-area .lobe-scroll-area__thumb {
+  border-radius: inherit;
+  background-color: var(--app-scroll-thumb);
+}
+.lobe-scroll-area__scrollbar:hover .lobe-scroll-area__thumb {
+  background-color: var(--app-scroll-hover);
+}
+.lobe-scroll-area__scrollbar:active .lobe-scroll-area__thumb {
+  background-color: var(--app-scroll-active);
+}
+
+@media (forced-colors: active) {
+  :root {
+    --app-scroll-thumb: ButtonText;
+    --app-scroll-hover: Highlight;
+    --app-scroll-active: Highlight;
+  }
+  .lobe-scroll-area .lobe-scroll-area__thumb {
+    forced-color-adjust: none;
+  }
+}

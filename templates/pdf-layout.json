@@ -1,0 +1,44 @@
+{
+  "fontSize": {
+    "label": "正文字号（pt）",
+    "min": 8,
+    "max": 18,
+    "step": 0.5,
+    "default": 10
+  },
+  "titleSize": {
+    "label": "标题字号（pt）",
+    "min": 12,
+    "max": 36,
+    "step": 1,
+    "default": 18
+  },
+  "lineHeight": {
+    "label": "行距（倍）",
+    "min": 1,
+    "max": 2.5,
+    "step": 0.01,
+    "default": 1.48
+  },
+  "paragraphGap": {
+    "label": "段间距（mm）",
+    "min": 0,
+    "max": 8,
+    "step": 0.1,
+    "default": 1.1
+  },
+  "verticalMargin": {
+    "label": "上下页边距（mm）",
+    "min": 5,
+    "max": 45,
+    "step": 1,
+    "default": 18
+  },
+  "horizontalMargin": {
+    "label": "左右页边距（mm）",
+    "min": 5,
+    "max": 45,
+    "step": 1,
+    "default": 19
+  }
+}

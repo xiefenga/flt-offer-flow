@@ -1,0 +1,43 @@
+/* Portals live outside the page layout. Size their surfaces to the space
+   reported by the positioner, including when they open near a window edge. */
+body
+  :is(.lobe-popover, .lobe-dropdown-menu, .lobe-select__popup, .lobe-tooltip) {
+  box-sizing: border-box;
+  max-inline-size: min(var(--available-width, 100vw), calc(100vw - 16px));
+  overflow-wrap: anywhere;
+}
+body :is(.lobe-popover, .lobe-dropdown-menu, .lobe-select__popup),
+body
+  :is(
+    .lobe-popover__viewport,
+    .lobe-dropdown-menu__viewport,
+    .lobe-select__list
+  ) {
+  overflow-x: clip;
+}
+body .lobe-dropdown-menu {
+  min-inline-size: min(
+    220px,
+    var(--available-width, 100vw),
+    calc(100vw - 16px)
+  );
+}
+body .lobe-select__popup {
+  min-inline-size: min(var(--anchor-width, 0px), var(--available-width, 100vw));
+}
+body
+  :is(
+    .lobe-dropdown-menu__label,
+    .lobe-dropdown-menu__desc,
+    .lobe-select__item-text
+  ) {
+  min-inline-size: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+body .lobe-picker-root.lobe-picker-dropdown .lobe-picker-panel-container {
+  max-inline-size: calc(100vw - 16px);
+}
+body .lobe-picker-root.lobe-picker-dropdown .lobe-picker-datetime-panel {
+  flex-wrap: wrap;
+}
